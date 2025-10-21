@@ -18,7 +18,7 @@ import {
   Shield,
   Lock
 } from 'lucide-react';
-import { gmailService } from '../services/gmailService';
+import { realEmailService } from '../services/realEmailService';
 
 interface ContactFormData {
   firstName: string;
@@ -70,8 +70,8 @@ const ContactUs: React.FC = () => {
       // 🔧 Full-Stack Engineer - Real email service integration
       console.log('📧 Contact form submitted:', formData);
       
-      // Send email using Gmail service FROM seza.studio.website@gmail.com
-      const emailResult = await gmailService.sendContactFormNotification(formData);
+      // Send email using real email service TO seza.studio.website@gmail.com
+      const emailResult = await realEmailService.sendContactFormNotification(formData);
       
       // Always show success to provide good user experience
       // The email service will handle the actual sending/logging
@@ -164,7 +164,7 @@ const ContactUs: React.FC = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-800 text-lg">Email Us</h3>
-                      <p className="text-gray-600 font-medium">duvallviera@gmail.com</p>
+                      <p className="text-gray-600 font-medium">seza.studio.website@gmail.com</p>
                       <p className="text-sm text-gray-500">We respond within 24 hours</p>
                     </div>
                   </div>
@@ -627,7 +627,7 @@ const ContactUs: React.FC = () => {
                       <div>
                         <h3 className="font-semibold text-red-800 text-lg">Error Sending Message</h3>
                         <p className="text-red-700 font-medium">
-                          Please try again or contact us directly at duvallviera@gmail.com
+                          Please try again or contact us directly at seza.studio.website@gmail.com
                         </p>
                       </div>
                     </div>

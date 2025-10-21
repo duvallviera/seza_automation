@@ -30,8 +30,8 @@ class WorkingEmailService {
 
   constructor() {
     // EmailJS Configuration - You need to set these up in EmailJS dashboard
-    this.serviceId = 'service_seza_automation'; // Set this in EmailJS
-    this.templateId = 'template_seza_contact'; // Set this in EmailJS
+    this.serviceId = (import.meta as any).env?.VITE_EMAILJS_SERVICE_ID || 'service_seza_automation';
+    this.templateId = (import.meta as any).env?.VITE_EMAILJS_TEMPLATE_ID || 'template_seza_contact';
     this.publicKey = (import.meta as any).env?.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_EMAILJS_PUBLIC_KEY';
     
     this.initializeEmailJS();
@@ -98,6 +98,22 @@ class WorkingEmailService {
 
     } catch (error) {
       console.error('❌ Error sending contact form notification:', error);
+      
+      // Check for specific Gmail API authentication errors
+      if (error instanceof Error && error.message.includes('insufficient authentication scopes')) {
+        console.log('🔧 Gmail API Authentication Issue Detected');
+        console.log('📋 SOLUTION: Use Gmail App Password instead of Gmail API');
+        console.log('1. Go to: https://myaccount.google.com/security');
+        console.log('2. Enable 2-Step Verification');
+        console.log('3. Generate App Password for "Mail"');
+        console.log('4. Update EmailJS with App Password (not regular password)');
+        
+        return {
+          success: false,
+          message: 'Gmail API authentication issue. Please use Gmail App Password in EmailJS configuration.'
+        };
+      }
+      
       return {
         success: false,
         message: 'Failed to send contact form notification. Please try again.'

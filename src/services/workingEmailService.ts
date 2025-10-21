@@ -29,10 +29,16 @@ class WorkingEmailService {
   private isInitialized: boolean = false;
 
   constructor() {
-    // EmailJS Configuration - You need to set these up in EmailJS dashboard
-    this.serviceId = (import.meta as any).env?.VITE_EMAILJS_SERVICE_ID || 'service_seza_automation';
+    // EmailJS Configuration - Using your specific credentials
+    this.serviceId = (import.meta as any).env?.VITE_EMAILJS_SERVICE_ID || 'seza_automation';
     this.templateId = (import.meta as any).env?.VITE_EMAILJS_TEMPLATE_ID || 'template_seza_contact';
-    this.publicKey = (import.meta as any).env?.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_EMAILJS_PUBLIC_KEY';
+    this.publicKey = (import.meta as any).env?.VITE_EMAILJS_PUBLIC_KEY || 'akyZ_pzuM2ZpW-UnH';
+    
+    console.log('🔧 EmailJS Configuration:', {
+      serviceId: this.serviceId,
+      templateId: this.templateId,
+      publicKey: this.publicKey ? 'Set' : 'Not Set'
+    });
     
     this.initializeEmailJS();
   }

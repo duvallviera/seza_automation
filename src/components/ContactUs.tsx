@@ -19,6 +19,7 @@ import {
   Lock
 } from 'lucide-react';
 import { workingEmailService } from '../services/workingEmailService';
+import { autoReplyService } from '../services/autoReplyService';
 
 interface ContactFormData {
   firstName: string;
@@ -72,6 +73,22 @@ const ContactUs: React.FC = () => {
       
       // Send email using working email service TO seza.studio.website@gmail.com
       const emailResult = await workingEmailService.sendContactFormNotification(formData);
+      
+      // 🤖 Auto Reply System - Send intelligent response to customer
+      const autoReplyResult = await autoReplyService.processInquiryAndReply({
+        inquiryType: formData.inquiryType,
+        urgency: formData.urgency,
+        customerName: `${formData.firstName} ${formData.lastName}`,
+        customerEmail: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        budget: formData.budget,
+        timeline: formData.timeline,
+        company: formData.company,
+        phone: formData.phone
+      });
+      
+      console.log('🤖 Auto-reply system activated:', autoReplyResult);
       
       // Always show success to provide good user experience
       // The email service will handle the actual sending/logging

@@ -18,7 +18,7 @@ import {
   Shield,
   Lock
 } from 'lucide-react';
-import { realEmailService } from '../services/realEmailService';
+import { workingEmailService } from '../services/workingEmailService';
 
 interface ContactFormData {
   firstName: string;
@@ -70,8 +70,8 @@ const ContactUs: React.FC = () => {
       // 🔧 Full-Stack Engineer - Real email service integration
       console.log('📧 Contact form submitted:', formData);
       
-      // Send email using real email service TO seza.studio.website@gmail.com
-      const emailResult = await realEmailService.sendContactFormNotification(formData);
+      // Send email using working email service TO seza.studio.website@gmail.com
+      const emailResult = await workingEmailService.sendContactFormNotification(formData);
       
       // Always show success to provide good user experience
       // The email service will handle the actual sending/logging
